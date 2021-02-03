@@ -20,7 +20,7 @@ defmodule Homework.MixProject do
   def application do
     [
       mod: {Homework.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 
