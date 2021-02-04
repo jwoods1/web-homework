@@ -10,6 +10,8 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+
+## NEED TO CLEAN THIS UP
 alias Homework.{Users, Merchants, Transactions}
 
 users = [
@@ -29,22 +31,58 @@ users = [
     dob: "Nov 1, 1990"
   },
 ]
-
-Enum.each(users, fn(data) ->
-    Users.create_user(data)
-end)
-
 merchants = [
   %{
-    description: "Developer help site",
-    name: "Stackoverflow",
+    description: "Quick Stop Food service",
+    name: "Qstop",
   },
   %{
-    description: "Elixir Docs - package repo",
-    name: "Hex",
+    description: "Git source host",
+    name: "Github",
   },
 ]
+transactions = [
+  %{
 
+    amount: 200,
+    credit: true,
+    debit: false,
+    description: "Dinner"
+  },
+  %{
+
+    amount: 20,
+    credit: true,
+    debit: false,
+    description: "Gas"
+  },
+   %{
+
+    amount: 40,
+    credit: false,
+    debit: true,
+    description: "Lunch"
+  },
+   %{
+    amount: 3000,
+    credit: false,
+    debit: true,
+    description: "Entiprise app"
+  }
+]
+
+Enum.each(users, fn(data) ->
+  Users.create_user(data)
+end)
 Enum.each(merchants, fn(data) ->
   Merchants.create_merchant(data)
+end)
+Enum.each(transactions, fn(data) ->
+  %{:id => merch } = Merchants.list_merchants([])
+    |> Enum.random
+  %{:id => user} = Users.list_users([])
+    |> Enum.random
+    data = Map.put_new(data, :user_id, user)
+    data = Map.put_new(data, :merchant_id, merch)
+  Transactions.create_transaction(data)
 end)
