@@ -1,5 +1,6 @@
 defmodule HomeworkWeb.Resolvers.CompaniesResolver do
-  alias Homework.Companies
+  alias Homework.{Companies, Users,Transactions}
+  alias Absinthe.Resolution.Helpers
 
   @doc """
   Get a list of companies
@@ -8,6 +9,18 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
     {:ok, Companies.list_companies(args)}
   end
 
+ @doc """
+  Get a list of users for company
+  """
+  def users(company, _args, _source) do
+    {:ok, Users.list_users_by_company(company.id)}
+  end
+  @doc """
+  Get a list of transactions for company
+  """
+  def transactions(company, _args, _source) do
+    {:ok, Transactions.list_transactions_by_company(company.id)}
+  end
   @doc """
   Create a new company
   """

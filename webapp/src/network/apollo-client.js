@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 
-const SERVER_URL = 'http://localhost:8000/graphiql'
+const SERVER_URL = 'http://localhost:8000'
 
 const request = async operation => {
   let headers = {}

@@ -20,7 +20,24 @@ defmodule Homework.Merchants do
   def list_merchants(_args) do
     Repo.all(Merchant)
   end
+  @doc """
+  Returns the list of Merchant matching search name
 
+  ## Examples
+      iex> search_merchants(string)
+
+  """
+  def search_merchants(search) do
+    #gets first 2 chars of string
+    start_character = String.slice(search, 0..1)
+    from(
+      m in Merchant,
+      where: ilike(m.name, ^"#{start_character}%"),
+      where: fragment("SIMILARITY(?, ?) > 0",  m.name, ^search),
+      order_by: fragment("LEVENSHTEIN(?, ?)",m.name, ^search)
+    )
+    |> Repo.all()
+  end
   @doc """
   Gets a single merchant.
 

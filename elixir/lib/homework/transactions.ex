@@ -20,6 +20,36 @@ defmodule Homework.Transactions do
   def list_transactions(_args) do
     Repo.all(Transaction)
   end
+  @doc """
+  Returns the list of transactions for between min / max .
+
+  """
+  def list_transactions_min_max(min, max) do
+    query = from t in Transaction, where: t.amount >= ^min and t.amount <= ^max
+    Repo.all(query)
+  end
+  @doc """
+  Returns the list of transactions for company .
+  ## Examples
+      iex> list_transactions([])
+      [%Transaction{}, ...]
+  """
+  def list_transactions_by_company(id) do
+    query = from t in Transaction, where: t.company_id == ^id
+    Repo.all(query)
+  end
+  @doc """
+  Returns the list of transactions from user
+  ## Examples
+
+      iex> list_transactions([])
+      [%Transaction{}, ...]
+
+  """
+  def list_transactions_by_user(id) do
+    query = from t in Transaction, where: t.user_id == ^id
+    Repo.all(query)
+  end
 
   @doc """
   Gets a single transaction.

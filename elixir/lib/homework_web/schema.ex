@@ -14,16 +14,25 @@ defmodule HomeworkWeb.Schema do
   query do
     @desc "Get all Transactions"
     field(:transactions, list_of(:transaction)) do
+      arg(:min, :integer)
+      arg(:max, :integer)
       resolve(&TransactionsResolver.transactions/3)
     end
 
     @desc "Get all Users"
     field(:users, list_of(:user)) do
+      arg(:search, :string)
       resolve(&UsersResolver.users/3)
+    end
+    @desc "Get a Users"
+    field(:user, :user) do
+      arg(:id, non_null(:id))
+      resolve(&UsersResolver.user/3)
     end
 
     @desc "Get all Merchants"
     field(:merchants, list_of(:merchant)) do
+      arg(:search, :string)
       resolve(&MerchantsResolver.merchants/3)
     end
 

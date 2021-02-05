@@ -12,7 +12,7 @@
 
 
 ## NEED TO CLEAN THIS UP
-alias Homework.{Users, Merchants, Transactions}
+alias Homework.{Users, Merchants, Transactions, Companies}
 
 users = [
   %{
@@ -70,19 +70,47 @@ transactions = [
     description: "Entiprise app"
   }
 ]
+companies = [
+  %{
+    available_credit: 0,
+    credit_line: 5000000,
+    name: "City of Boise",
+  },
+  %{
+    available_credit: 0,
+    credit_line: 10000000,
+    name: "Winco",
+  },
+  %{
+    available_credit: 0,
+    credit_line: 7000000,
+    name: "Woods Tree Service",
+  }
+]
 
-Enum.each(users, fn(data) ->
-  Users.create_user(data)
-end)
+
 Enum.each(merchants, fn(data) ->
   Merchants.create_merchant(data)
+end)
+Enum.each(companies, fn(data) ->
+  Companies.create_company(data)
+end)
+
+Enum.each(users, fn(data) ->
+  %{:id => company } = Companies.list_companies([])
+  |> Enum.random
+  data = Map.put_new(data, :company_id, company)
+  Users.create_user(data)
 end)
 Enum.each(transactions, fn(data) ->
   %{:id => merch } = Merchants.list_merchants([])
     |> Enum.random
   %{:id => user} = Users.list_users([])
     |> Enum.random
-    data = Map.put_new(data, :user_id, user)
-    data = Map.put_new(data, :merchant_id, merch)
+  %{:id => company } = Companies.list_companies([])
+    |> Enum.random
+  data = Map.put_new(data, :user_id, user)
+  data = Map.put_new(data, :merchant_id, merch)
+  data = Map.put_new(data, :company_id, company)
   Transactions.create_transaction(data)
 end)

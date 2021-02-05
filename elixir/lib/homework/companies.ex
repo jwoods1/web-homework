@@ -4,7 +4,7 @@ defmodule Homework.Companies do
   """
 
   import Ecto.Query, warn: false
-  alias Homework.Repo
+  alias Homework.{Repo, Paginator}
 
   alias Homework.Companies.Company
 
@@ -18,7 +18,9 @@ defmodule Homework.Companies do
 
   """
   def list_companies(_args) do
-    Repo.all(Company)
+    Company
+    |> Paginator.paginate(0, 1)
+    |> Repo.all()
   end
 
   @doc """

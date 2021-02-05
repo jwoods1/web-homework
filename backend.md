@@ -19,10 +19,10 @@ For **junior engineers** complete any 1 of these objectives and include a basic 
 
 ## Objectives
 
- * Write filtering options for transactions, users, and/or merchants. This could include:
-   * fuzzy searching for a user by first and last name
-   * fuzzy searching for a merchant by name
-   * getting back transactions with an amount between `min` and `max` arguments
+ * [x] Write filtering options for transactions, users, and/or merchants. This could include:
+   * [x] fuzzy searching for a user by first and last name
+   * [x] fuzzy searching for a merchant by name
+   * [x] getting back transactions with an amount between `min` and `max` arguments
 
  * Write a new schema, queries, and mutations to add companies to the app
    * [x] users should belong to a company and we should require transactions to pass in a company_id

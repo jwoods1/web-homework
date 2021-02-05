@@ -9,7 +9,6 @@ defmodule Homework.Companies.Company do
     field :available_credit, :integer
     field :credit_line, :integer
     field :name, :string
-
     has_many :users, User
     has_many :transactions, Transaction
 
@@ -19,7 +18,7 @@ defmodule Homework.Companies.Company do
   @doc false
   def changeset(company, attrs) do
     company
-    |> cast(attrs, [:name, :credit_line, :available_credit, :credit_line, :transactions])
-    |> validate_required([:name, :credit_line, :available_credit, :credit_line, :transactions])
+    |> cast(attrs, [:name, :credit_line, :available_credit, :credit_line])
+    |> validate_required([:name, :credit_line, :available_credit, :credit_line])
   end
 end
