@@ -6,8 +6,8 @@ defmodule Homework.CompaniesTest do
   describe "companies" do
     alias Homework.Companies.Company
 
-    @valid_attrs %{available_credit: "some available_credit", credit_line: "some credit_line", name: "some name", transactions: "some transactions"}
-    @update_attrs %{available_credit: "some updated available_credit", credit_line: "some updated credit_line", name: "some updated name", transactions: "some updated transactions"}
+    @valid_attrs %{available_credit: 0, credit_line: 0 , name: "some name"}
+    @update_attrs %{available_credit: 100 , credit_line: 200, name: "some updated name"}
     @invalid_attrs %{available_credit: nil, credit_line: nil, name: nil, transactions: nil}
 
     def company_fixture(attrs \\ %{}) do
@@ -19,9 +19,9 @@ defmodule Homework.CompaniesTest do
       company
     end
 
-    test "list_companies/0 returns all companies" do
+    test "list_companies/1 returns all companies" do
       company = company_fixture()
-      assert Companies.list_companies() == [company]
+      assert Companies.list_companies([]) == [company]
     end
 
     test "get_company!/1 returns the company with given id" do
@@ -31,10 +31,9 @@ defmodule Homework.CompaniesTest do
 
     test "create_company/1 with valid data creates a company" do
       assert {:ok, %Company{} = company} = Companies.create_company(@valid_attrs)
-      assert company.available_credit == "some available_credit"
-      assert company.credit_line == "some credit_line"
+      assert company.available_credit == 0
+      assert company.credit_line == 0
       assert company.name == "some name"
-      assert company.transactions == "some transactions"
     end
 
     test "create_company/1 with invalid data returns error changeset" do
@@ -44,10 +43,9 @@ defmodule Homework.CompaniesTest do
     test "update_company/2 with valid data updates the company" do
       company = company_fixture()
       assert {:ok, %Company{} = company} = Companies.update_company(company, @update_attrs)
-      assert company.available_credit == "some updated available_credit"
-      assert company.credit_line == "some updated credit_line"
+      assert company.available_credit == 100
+      assert company.credit_line == 200
       assert company.name == "some updated name"
-      assert company.transactions == "some updated transactions"
     end
 
     test "update_company/2 with invalid data returns error changeset" do

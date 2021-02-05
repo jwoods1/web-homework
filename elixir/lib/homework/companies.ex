@@ -19,7 +19,6 @@ defmodule Homework.Companies do
   """
   def list_companies(_args) do
     Company
-    |> Paginator.paginate(0, 1)
     |> Repo.all()
   end
 
