@@ -5,7 +5,6 @@ defmodule HomeworkWeb.Router do
     plug CORSPlug, [origin: "*"]
     plug(:accepts, ["json"])
   end
-
   scope "/" do
     pipe_through(:api)
 

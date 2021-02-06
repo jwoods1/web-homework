@@ -79,13 +79,13 @@ defmodule Homework.UsersTest do
       assert user == Users.get_user!(user.id)
     end
 
-    test "delete_user/1 deletes the user", %{invalid_attrs: invalid_attrs, valid_attrs: valid_attrs} do
+    test "delete_user/1 deletes the user", %{valid_attrs: valid_attrs} do
       user = user_fixture(valid_attrs)
       assert {:ok, %User{}} = Users.delete_user(user)
       assert_raise Ecto.NoResultsError, fn -> Users.get_user!(user.id) end
     end
 
-    test "change_user/1 returns a user changeset", %{invalid_attrs: invalid_attrs, valid_attrs: valid_attrs} do
+    test "change_user/1 returns a user changeset", %{valid_attrs: valid_attrs} do
       user = user_fixture(valid_attrs)
       assert %Ecto.Changeset{} = Users.change_user(user)
     end

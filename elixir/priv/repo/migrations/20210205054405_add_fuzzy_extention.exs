@@ -1,8 +1,5 @@
 defmodule Homework.Repo.Migrations.AddFuzzyExtention do
   use Ecto.Migration
-
-  use Ecto.Migration
-
   def up do
     execute "CREATE EXTENSION pg_trgm"
     execute "CREATE EXTENSION fuzzystrmatch"
