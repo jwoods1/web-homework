@@ -20,7 +20,7 @@ defmodule Homework.MixProject do
   def application do
     [
       mod: {Homework.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule Homework.MixProject do
       {:poison, "~> 2.1.0"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"}
+      {:telemetry_poller, "~> 0.4"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
