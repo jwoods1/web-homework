@@ -1,7 +1,6 @@
 defmodule Homework.TransactionsTest do
   use Homework.DataCase
 
-  alias Ecto.UUID
   alias Homework.{Users,Companies,Transactions,Merchants}
 
   describe "transactions" do

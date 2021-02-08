@@ -1,6 +1,5 @@
 defmodule HomeworkWeb.Resolvers.CompaniesResolver do
   alias Homework.{Companies, Users,Transactions}
-  alias Absinthe.Resolution.Helpers
 
   @doc """
   Get a list of companies

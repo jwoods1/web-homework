@@ -4,7 +4,7 @@ defmodule Homework.Companies do
   """
 
   import Ecto.Query, warn: false
-  alias Homework.{Repo, Paginator}
+  alias Homework.{Repo}
 
   alias Homework.Companies.Company
 
