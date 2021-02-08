@@ -5,6 +5,7 @@ defmodule Homework.Paginator do
     if page > 0 do
       page = (page - 1) * size
     end
+
     query
     |> offset(^page)
     |> limit(^size)
@@ -12,6 +13,5 @@ defmodule Homework.Paginator do
   end
 
   def pagination_fields do
-
   end
 end

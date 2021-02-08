@@ -6,16 +6,16 @@ defmodule Homework.UsersTest do
   describe "users" do
     alias Homework.Users.User
 
-
     setup do
       {:ok, company1} =
-        Companies.create_company(%{available_credit: 0, credit_line: 0 , name: "some name"})
+        Companies.create_company(%{available_credit: 0, credit_line: 0, name: "some name"})
 
       valid_attrs = %{
         dob: "some dob",
         first_name: "some first_name",
         last_name: "some last_name",
-        company_id: company1.id}
+        company_id: company1.id
+      }
 
       update_attrs = %{
         dob: "some updated dob",
@@ -49,23 +49,28 @@ defmodule Homework.UsersTest do
       assert Users.list_users([]) == [user]
     end
 
-    test "get_user!/1 returns the user with given id",  %{valid_attrs: valid_attrs}  do
+    test "get_user!/1 returns the user with given id", %{valid_attrs: valid_attrs} do
       user = user_fixture(valid_attrs)
       assert Users.get_user!(user.id) == user
     end
 
-    test "create_user/1 with valid data creates a user", %{valid_attrs: valid_attrs}  do
+    test "create_user/1 with valid data creates a user", %{valid_attrs: valid_attrs} do
       assert {:ok, %User{} = user} = Users.create_user(valid_attrs)
       assert user.dob == "some dob"
       assert user.first_name == "some first_name"
       assert user.last_name == "some last_name"
     end
 
-    test "create_user/1 with invalid data returns error changeset", %{invalid_attrs: invalid_attrs} do
+    test "create_user/1 with invalid data returns error changeset", %{
+      invalid_attrs: invalid_attrs
+    } do
       assert {:error, %Ecto.Changeset{}} = Users.create_user(invalid_attrs)
     end
 
-    test "update_user/2 with valid data updates the user",  %{update_attrs: update_attrs,  valid_attrs: valid_attrs} do
+    test "update_user/2 with valid data updates the user", %{
+      update_attrs: update_attrs,
+      valid_attrs: valid_attrs
+    } do
       user = user_fixture(valid_attrs)
       assert {:ok, %User{} = user} = Users.update_user(user, update_attrs)
       assert user.dob == "some updated dob"
@@ -73,7 +78,10 @@ defmodule Homework.UsersTest do
       assert user.last_name == "some updated last_name"
     end
 
-    test "update_user/2 with invalid data returns error changeset", %{invalid_attrs: invalid_attrs, valid_attrs: valid_attrs}  do
+    test "update_user/2 with invalid data returns error changeset", %{
+      invalid_attrs: invalid_attrs,
+      valid_attrs: valid_attrs
+    } do
       user = user_fixture(valid_attrs)
       assert {:error, %Ecto.Changeset{}} = Users.update_user(user, invalid_attrs)
       assert user == Users.get_user!(user.id)

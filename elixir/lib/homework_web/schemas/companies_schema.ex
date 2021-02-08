@@ -13,9 +13,11 @@ defmodule HomeworkWeb.Schemas.CompaniesSchema do
     field(:available_credit, :integer)
     field(:inserted_at, :naive_datetime)
     field(:updated_at, :naive_datetime)
+
     field(:users, list_of(:user)) do
       resolve(&CompaniesResolver.users/3)
     end
+
     field(:transactions, list_of(:transaction)) do
       resolve(&CompaniesResolver.transactions/3)
     end

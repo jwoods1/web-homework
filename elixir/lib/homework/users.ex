@@ -9,6 +9,7 @@ defmodule Homework.Users do
   alias Homework.Users.User
 
   alias Homework.Transactions.Transaction
+
   @doc """
   Returns the list of users.
 
@@ -21,6 +22,7 @@ defmodule Homework.Users do
   def list_users(_args) do
     Repo.all(User)
   end
+
   @doc """
   Returns the list of users for a company.
 
@@ -29,10 +31,10 @@ defmodule Homework.Users do
 
   """
   def list_users_by_company(id) do
-    query = from u in User, preload: [:transactions]
-    query = from [u] in query, where: u.company_id == ^id
-    query = from [u] in query, join: t in Transaction, on: t.user_id == u.id
-   Repo.all(query)
+    query = from(u in User, preload: [:transactions])
+    query = from([u] in query, where: u.company_id == ^id)
+    query = from([u] in query, join: t in Transaction, on: t.user_id == u.id)
+    Repo.all(query)
   end
 
   @doc """
@@ -44,14 +46,19 @@ defmodule Homework.Users do
   """
   def search_users(search) do
     start_character = String.slice(search, 0..1)
+
     from(
       u in User,
-      where: ilike(u.last_name, ^"#{start_character}%") or ilike(u.first_name, ^"#{start_character}%"),
-      where: fragment("SIMILARITY(?, ?) > 0",  u.last_name, ^search) or fragment("SIMILARITY(?, ?) > 0",  u.first_name, ^search),
+      where:
+        ilike(u.last_name, ^"#{start_character}%") or ilike(u.first_name, ^"#{start_character}%"),
+      where:
+        fragment("SIMILARITY(?, ?) > 0", u.last_name, ^search) or
+          fragment("SIMILARITY(?, ?) > 0", u.first_name, ^search),
       order_by: fragment("LEVENSHTEIN(?, ?)", u.last_name, ^search)
     )
     |> Repo.all()
   end
+
   @doc """
   Gets a single user.
 

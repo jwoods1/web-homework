@@ -24,6 +24,7 @@ defmodule HomeworkWeb.Schema do
       arg(:search, :string)
       resolve(&UsersResolver.users/3)
     end
+
     @desc "Get a Users"
     field(:user, :user) do
       arg(:id, non_null(:id))

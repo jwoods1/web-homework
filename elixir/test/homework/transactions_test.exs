@@ -1,15 +1,14 @@
 defmodule Homework.TransactionsTest do
   use Homework.DataCase
 
-  alias Homework.{Users,Companies,Transactions,Merchants}
+  alias Homework.{Users, Companies, Transactions, Merchants}
 
   describe "transactions" do
     alias Homework.Transactions.Transaction
 
     setup do
-
       {:ok, company1} =
-        Companies.create_company(%{available_credit: 0, credit_line: 0 , name: "some name"})
+        Companies.create_company(%{available_credit: 0, credit_line: 0, name: "some name"})
 
       {:ok, merchant1} =
         Merchants.create_merchant(%{description: "some description", name: "some name"})

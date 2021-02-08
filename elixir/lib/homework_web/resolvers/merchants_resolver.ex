@@ -7,6 +7,7 @@ defmodule HomeworkWeb.Resolvers.MerchantsResolver do
   def merchants(_root, %{search: search}, _info) do
     {:ok, Merchants.search_merchants(search)}
   end
+
   def merchants(_root, args, _info) do
     {:ok, Merchants.list_merchants(args)}
   end

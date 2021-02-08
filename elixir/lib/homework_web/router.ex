@@ -2,9 +2,10 @@ defmodule HomeworkWeb.Router do
   use HomeworkWeb, :router
 
   pipeline :api do
-    plug CORSPlug, [origin: "*"]
+    plug(CORSPlug, origin: "*")
     plug(:accepts, ["json"])
   end
+
   scope "/" do
     pipe_through(:api)
 
@@ -13,6 +14,7 @@ defmodule HomeworkWeb.Router do
       interface: :simple,
       context: %{pubsub: HomeworkWeb.Endpoint}
     )
+
     forward("/", Absinthe.Plug,
       schema: HomeworkWeb.Schema,
       interface: :simple,

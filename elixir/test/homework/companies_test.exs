@@ -6,8 +6,8 @@ defmodule Homework.CompaniesTest do
   describe "companies" do
     alias Homework.Companies.Company
 
-    @valid_attrs %{available_credit: 0, credit_line: 0 , name: "some name"}
-    @update_attrs %{available_credit: 100 , credit_line: 200, name: "some updated name"}
+    @valid_attrs %{available_credit: 0, credit_line: 0, name: "some name"}
+    @update_attrs %{available_credit: 100, credit_line: 200, name: "some updated name"}
     @invalid_attrs %{available_credit: nil, credit_line: nil, name: nil, transactions: nil}
 
     def company_fixture(attrs \\ %{}) do
